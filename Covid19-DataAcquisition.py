@@ -180,14 +180,69 @@ def plot_Covid19_SH_data(pd_data: pd.DataFrame):
     :return:
     """
     pd_NewCases = pd_data.drop(columns=['Death', 'AllInfection', 'AllAsymptomatic'])
-    melt_df = pd.melt(pd_NewCases, id_vars=['Date'], var_name='variable', value_name='value')
-    area_fill_plot = (ggplot(melt_df, aes(x='Date', y='value', group='variable', color='variable'))
-                      + geom_area(aes(fill='variable'), alpha=0.7, position='identity')
-                      + geom_line(aes(color='variable'), size=0.75) +  # color='black',
+    melt_df = pd.melt(pd_NewCases, id_vars=['Date'], var_name='COVID-19-Cases', value_name='value')
+    area_fill_plot = (ggplot(melt_df, aes(x='Date', y='value', group='COVID-19-Cases', color='COVID-19-Cases'))
+                      + geom_area(aes(fill='COVID-19-Cases'), alpha=0.7, position='identity')
+                      + geom_line(aes(color='COVID-19-Cases'), size=0.75) +  # color='red',
                       scale_x_date(date_labels="%m-%d", date_breaks='5 days')
-                      + scale_fill_hue(s=0.9, l=0.65, h=0.0617, color_space='husl') + xlab("2022ShangHai")
-                      + ylab("Covid-19 Cases")) + theme(legend_position=(0.25, 0.75))
+                      + scale_fill_hue(s=0.9, l=0.65, h=0.0617, color_space='husl') + xlab("2022@ShangHai")
+                      + ylab("Covid-19 Cases")) + \
+                     theme(legend_position=(0.25, 0.75),
+                           axis_title=element_text(size=20, face="plain", color="#ec5519"),
+                           axis_text=element_text(size=10, face="plain", color="#E7298A"),
+                           legend_text=element_text(size=18, face="plain", color="#E7298A"), figure_size=(8, 8),
+                           dpi=72)
     print(area_fill_plot)
+
+
+def calendar_map_Covid19data_SH(cal_data: pd.DataFrame):
+    """
+    draw a calendar map with the pd data of [date,case]
+    pd data example:
+              Date  NewAsymptomatic
+    0   2022-05-12             1869
+    1   2022-05-11             1305
+    2   2022-05-10             1259
+    3   2022-05-09             2780
+    4   2022-05-08             3625
+    :param cal_data: pd.Dataframe data with two columns [date,value]
+    :return:
+    """
+    df = pd.melt(cal_data, id_vars=['Date'], var_name='variable', value_name='value')
+    df['Date'] = [datetime.datetime.strptime(d, "%Y-%m-%d").date() for d in df['Date']]
+    df['year'] = [d.year for d in df['Date']]
+    df = df[df['year'] == 2022]
+    df['month'] = [d.month for d in df['Date']]
+    month_label = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    df['monthf'] = df['month'].replace(np.arange(1, 13, 1), month_label)
+    from pandas.api.types import CategoricalDtype
+    cat_dtype = CategoricalDtype(categories=month_label, ordered=True)
+    df['monthf'] = df['monthf'].astype(cat_dtype)
+    df['week'] = [int(d.strftime('%W')) for d in df['Date']]
+    df['weekay'] = [int(d.strftime('%u')) for d in df['Date']]
+    week_label = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    df['weekdayf'] = df['weekay'].replace(np.arange(1, 8, 1), week_label)
+    catWeek_dtype = CategoricalDtype(categories=week_label, ordered=True)
+    df['weekdayf'] = df['weekdayf'].astype(catWeek_dtype)
+    df['day'] = [d.strftime('%d') for d in df['Date']]
+    df['monthweek'] = df.groupby('monthf')['week'].apply(lambda x: x - x.min() + 1)
+    calendar_plot = (ggplot(df, aes('weekdayf', 'monthweek', fill='value')) +
+                     geom_tile(colour="white", size=0.1) +
+                     scale_fill_cmap(cmap_name='OrRd', name='New Cases') +
+                     geom_text(aes(label='day'), size=8) +
+                     facet_wrap('~monthf', nrow=1) +
+                     scale_y_reverse() +
+                     xlab("COVID-19 2022@ShangHai") + ylab("Week") +
+                     theme(strip_text=element_text(size=16, face="plain", color="black"),
+                           text=element_text(family="SimHei"),
+                           axis_title=element_text(size=14, face="plain", color="deepskyblue"),
+                           axis_text=element_text(size=10, face="plain", color="#E7298A"),
+                           legend_position='left',
+                           legend_background=element_blank(),
+                           aspect_ratio=0.85,
+                           figure_size=(8, 4),
+                           dpi=72))
+    print(calendar_plot)
 
 
 if __name__ == '__main__':
@@ -199,54 +254,56 @@ if __name__ == '__main__':
     pd_data = dict_to_DataFrame(Dict_daily_data)
 
     # print(pd_data)
-    pd_NewCases = pd_data.drop(columns=['Death', 'AllInfection', 'AllAsymptomatic', 'NewInfection'])
-    print(pd_NewCases)
+    # area fill plot
+    plot_Covid19_SH_data(pd_data)
+
     # save data to sql and excel csv,json file
     # dict_to_SQLTable(Dict_daily_data,table_name="SH_COVID19_DATA",db_path=database_path,db_name="Covid19_SH_db.db")
     # save_pd_data(pd_data,database_path,"SH_COVID19_DATA")
+
+    # NewCases=NewInfection+NewAsymptomatic
+    pd_data["NewCases"] = pd_data['NewInfection'] + pd_data['NewAsymptomatic']
+    pd_NewCases = pd_data.drop(columns=['Death', 'AllInfection', 'AllAsymptomatic', 'NewInfection', 'NewAsymptomatic'])
+    print(pd_NewCases)
     melt_df = pd.melt(pd_NewCases, id_vars=['Date'], var_name='variable', value_name='value')
-    # base_plot = (ggplot(melt_df, aes(x='Date', y='value', group='variable', color='variable')) + geom_line(size=1)
-    #              + scale_x_date(date_labels="%m-%d", date_breaks='5 days')
-    #             + scale_fill_hue(s=0.9, l=0.65, h=0.0417, color_space='husl') + xlab("Date")+ylab("Cases"))
+
+    # calendar plot pd_NewCases
+    calendar_map_Covid19data_SH(pd_NewCases)
+    # df = pd.melt(pd_NewCases, id_vars=['Date'], var_name='variable', value_name='value')
+    # df['Date'] = [datetime.datetime.strptime(d, "%Y-%m-%d").date() for d in df['Date']]
+    # df['year'] = [d.year for d in df['Date']]
+    # df = df[df['year'] == 2022]
+    # df['month'] = [d.month for d in df['Date']]
+    # month_label = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    # df['monthf'] = df['month'].replace(np.arange(1, 13, 1), month_label)
+    # from pandas.api.types import CategoricalDtype
+    #
+    # cat_dtype = CategoricalDtype(categories=month_label, ordered=True)
+    # df['monthf'] = df['monthf'].astype(cat_dtype)
+    # df['week'] = [int(d.strftime('%W')) for d in df['Date']]
+    # df['weekay'] = [int(d.strftime('%u')) for d in df['Date']]
+    # week_label = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    # df['weekdayf'] = df['weekay'].replace(np.arange(1, 8, 1), week_label)
+    # catWeek_dtype = CategoricalDtype(categories=week_label, ordered=True)
+    # df['weekdayf'] = df['weekdayf'].astype(catWeek_dtype)
+    # df['day'] = [d.strftime('%d') for d in df['Date']]
+    # df['monthweek'] = df.groupby('monthf')['week'].apply(lambda x: x - x.min() + 1)
+    # base_plot = (ggplot(df, aes('weekdayf', 'monthweek', fill='value')) +
+    #              geom_tile(colour="white", size=0.1) +
+    #              scale_fill_cmap(cmap_name='OrRd', name='Asymptomatic') +
+    #              geom_text(aes(label='day'), size=8) +
+    #              facet_wrap('~monthf', nrow=1) +
+    #              scale_y_reverse() +
+    #              xlab("COVID-19 2022@ShangHai") + ylab("Week") +
+    #              theme(strip_text=element_text(size=11, face="plain", color="black"),
+    #                    text=element_text(family="SimHei"),
+    #                    axis_title=element_text(size=14, face="plain", color="deepskyblue"),
+    #                    axis_text=element_text(size=8, face="plain", color="#E7298A"),
+    #                    legend_position='left',
+    #                    legend_background=element_blank(),
+    #                    aspect_ratio=0.85,
+    #                    figure_size=(8, 4),
+    #                    dpi=100))
+    #
     # print(base_plot)
-    # plot_Covid19_SH_data(pd_data)
-
-    # calender plot
-    df = pd.melt(pd_NewCases, id_vars=['Date'], var_name='variable', value_name='value')
-    df['Date'] = [datetime.datetime.strptime(d, "%Y-%m-%d").date() for d in df['Date']]
-    df['year'] = [d.year for d in df['Date']]
-    df = df[df['year'] == 2022]
-    df['month'] = [d.month for d in df['Date']]
-    month_label = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    df['monthf'] = df['month'].replace(np.arange(1, 13, 1), month_label)
-    from pandas.api.types import CategoricalDtype
-
-    cat_dtype = CategoricalDtype(categories=month_label, ordered=True)
-    df['monthf'] = df['monthf'].astype(cat_dtype)
-    df['week'] = [int(d.strftime('%W')) for d in df['Date']]
-    df['weekay'] = [int(d.strftime('%u')) for d in df['Date']]
-    week_label = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    df['weekdayf'] = df['weekay'].replace(np.arange(1, 8, 1), week_label)
-    catWeek_dtype = CategoricalDtype(categories=week_label, ordered=True)
-    df['weekdayf'] = df['weekdayf'].astype(catWeek_dtype)
-    df['day'] = [d.strftime('%d') for d in df['Date']]
-    df['monthweek'] = df.groupby('monthf')['week'].apply(lambda x: x - x.min() + 1)
-    base_plot = (ggplot(df, aes('weekdayf', 'monthweek', fill='value')) +
-                 geom_tile(colour="white", size=0.1) +
-                 scale_fill_cmap(cmap_name='OrRd', name='Asymptomatic') +
-                 geom_text(aes(label='day'), size=8) +
-                 facet_wrap('~monthf', nrow=1) +
-                 scale_y_reverse() +
-                 xlab("COVID-19 2022@ShangHai") + ylab("Week") +
-                 theme(strip_text=element_text(size=11, face="plain", color="black"),
-                       text=element_text(family="SimHei"),
-                       axis_title=element_text(size=14, face="plain", color="deepskyblue"),
-                       axis_text=element_text(size=8, face="plain", color="#E7298A"),
-                       legend_position='left',
-                       legend_background=element_blank(),
-                       aspect_ratio=0.85,
-                       figure_size=(8, 4),
-                       dpi=100))
-
-    print(base_plot)
-    print('get data done')
+    print('get data  and plot done')
