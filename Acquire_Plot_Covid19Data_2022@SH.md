@@ -114,7 +114,7 @@ print(f'save to json file {json_file_path} successfully')
 ## plot data
 
 via plotnine
-
+1. line-plot
 ```python
 # import pandas as pd
 def plot_Covid19_SH_data(pd_data: pd.DataFrame):
@@ -142,4 +142,63 @@ print(area_fill_plot)
 
 ```
 
-![lineplotdatacase]()
+results:
+
+![lineplotdatacase](https://cdn.jsdelivr.net/gh/zlmturnout/MyGithubIMG/BlogImg/PlotCovid19CaseSH20220517.png)
+
+2. Calendar plot
+
+```python
+def calendar_map_Covid19data_SH(cal_data: pd.DataFrame):
+    """
+    draw a calendar map with the pd data of [date,case]
+    pd data example:
+              Date  NewAsymptomatic
+    0   2022-05-12             1869
+    1   2022-05-11             1305
+    2   2022-05-10             1259
+    3   2022-05-09             2780
+    4   2022-05-08             3625
+    :param cal_data: pd.Dataframe data with two columns [date,value]
+    :return:
+    """
+    df = pd.melt(cal_data, id_vars=['Date'], var_name='variable', value_name='value')
+    df['Date'] = [datetime.datetime.strptime(d, "%Y-%m-%d").date() for d in df['Date']]
+    df['year'] = [d.year for d in df['Date']]
+    df = df[df['year'] == 2022]
+    df['month'] = [d.month for d in df['Date']]
+    month_label = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    df['monthf'] = df['month'].replace(np.arange(1, 13, 1), month_label)
+    from pandas.api.types import CategoricalDtype
+    cat_dtype = CategoricalDtype(categories=month_label, ordered=True)
+    df['monthf'] = df['monthf'].astype(cat_dtype)
+    df['week'] = [int(d.strftime('%W')) for d in df['Date']]
+    df['weekay'] = [int(d.strftime('%u')) for d in df['Date']]
+    week_label = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    df['weekdayf'] = df['weekay'].replace(np.arange(1, 8, 1), week_label)
+    catWeek_dtype = CategoricalDtype(categories=week_label, ordered=True)
+    df['weekdayf'] = df['weekdayf'].astype(catWeek_dtype)
+    df['day'] = [d.strftime('%d') for d in df['Date']]
+    df['monthweek'] = df.groupby('monthf')['week'].apply(lambda x: x - x.min() + 1)
+    calendar_plot = (ggplot(df, aes('weekdayf', 'monthweek', fill='value')) +
+                     geom_tile(colour="white", size=0.1) +
+                     scale_fill_cmap(cmap_name='OrRd', name='New Cases') +
+                     geom_text(aes(label='day'), size=8) +
+                     facet_wrap('~monthf', nrow=1) +
+                     scale_y_reverse() +
+                     xlab("COVID-19 2022@ShangHai") + ylab("Week") +
+                     theme(strip_text=element_text(size=16, face="plain", color="black"),
+                           text=element_text(family="SimHei"),
+                           axis_title=element_text(size=14, face="plain", color="deepskyblue"),
+                           axis_text=element_text(size=10, face="plain", color="#E7298A"),
+                           legend_position='left',
+                           legend_background=element_blank(),
+                           aspect_ratio=0.85,
+                           figure_size=(9, 5),
+                           dpi=100))
+    print(calendar_plot)
+```
+
+results:
+![Calendarplotcases](https://cdn.jsdelivr.net/gh/zlmturnout/MyGithubIMG/BlogImg/CalendarPlotCovid19CaseSH20220517.png)
+)
