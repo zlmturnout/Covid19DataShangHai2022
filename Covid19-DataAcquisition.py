@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 from plotnine import *
 
 # import functions for data process among <pandas pd_data>||<dict_data>||<SQL_table>
-from Dict_DataFrame_Sqlite import dict_to_DataFrame, create_path
+from Dict_DataFrame_Sqlite import dict_to_DataFrame, create_path, dict_to_SQLTable, save_pd_data
 
 """
 source url:http://m.sh.bendibao.com/mip/233243.html
@@ -88,7 +88,6 @@ def get_Covid19Data_SH(local_url: str, dict_daily_data=None):
     :param url:2022-05-12 page: "http://m.sh.bendibao.com/mip/233243.html"
     :return: Covid19Data in dict form: dict_data
     """
-    list_daily_data = []
     if dict_daily_data is None:
         dict_daily_data = {"Date": [], "NewInfection": [], "NewAsymptomatic": [],
                            "AllInfection": [], "AllAsymptomatic": [], "Death": []}
@@ -190,8 +189,8 @@ def plot_Covid19_SH_data(pd_data: pd.DataFrame):
                      theme(legend_position=(0.25, 0.75),
                            axis_title=element_text(size=20, face="plain", color="#ec5519"),
                            axis_text=element_text(size=10, face="plain", color="#E7298A"),
-                           legend_text=element_text(size=18, face="plain", color="#E7298A"), figure_size=(8, 8),
-                           dpi=72)
+                           legend_text=element_text(size=18, face="plain", color="#E7298A"), figure_size=(18, 18),
+                           dpi=100)
     print(area_fill_plot)
 
 
@@ -240,8 +239,8 @@ def calendar_map_Covid19data_SH(cal_data: pd.DataFrame):
                            legend_position='left',
                            legend_background=element_blank(),
                            aspect_ratio=0.85,
-                           figure_size=(8, 4),
-                           dpi=72))
+                           figure_size=(9, 5),
+                           dpi=100))
     print(calendar_plot)
 
 
@@ -258,8 +257,8 @@ if __name__ == '__main__':
     plot_Covid19_SH_data(pd_data)
 
     # save data to sql and excel csv,json file
-    # dict_to_SQLTable(Dict_daily_data,table_name="SH_COVID19_DATA",db_path=database_path,db_name="Covid19_SH_db.db")
-    # save_pd_data(pd_data,database_path,"SH_COVID19_DATA")
+    dict_to_SQLTable(Dict_daily_data, table_name="SH_COVID19_DATA", db_path=database_path, db_name="Covid19_SH_db.db")
+    save_pd_data(pd_data, database_path, "SH_COVID19_DATA")
 
     # NewCases=NewInfection+NewAsymptomatic
     pd_data["NewCases"] = pd_data['NewInfection'] + pd_data['NewAsymptomatic']
