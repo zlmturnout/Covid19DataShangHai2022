@@ -35,7 +35,7 @@ table_info = tr[0].find_all('td')[0].text.replace('\t', '').replace('\n', '').sp
 3. data structure  
    SH_COVID19_DATA structure
 
-note:no death data in the table [table_url](http://m.sh.bendibao.com/mip/233243.html)
+   note: no death data in the table [table_url](http://m.sh.bendibao.com/mip/233243.html)
 
 | date       | NewInfection | NewAsymptomatic | AllInfection | AllAsymptomatic | Death |
 |------------|--------------|-----------------|--------------|-----------------|-------|
@@ -200,5 +200,6 @@ def calendar_map_Covid19data_SH(cal_data: pd.DataFrame):
 ```
 
 results:
+
 ![Calendarplotcases](https://cdn.jsdelivr.net/gh/zlmturnout/MyGithubIMG/BlogImg/CalendarPlotCovid19CaseSH20220517.png)
 )
