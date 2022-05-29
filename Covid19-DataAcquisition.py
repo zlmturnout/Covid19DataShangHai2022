@@ -191,6 +191,7 @@ def plot_Covid19_SH_data(pd_data: pd.DataFrame):
                            axis_text=element_text(size=10, face="plain", color="#E7298A"),
                            legend_text=element_text(size=18, face="plain", color="#E7298A"), figure_size=(18, 18),
                            dpi=100)
+    area_fill_plot.save(filename='area_fillCOVID_SH2022.png', width=16, height=9, units="in", dpi=100)
     print(area_fill_plot)
 
 
@@ -241,6 +242,7 @@ def calendar_map_Covid19data_SH(cal_data: pd.DataFrame):
                            aspect_ratio=0.85,
                            figure_size=(9, 5),
                            dpi=100))
+    calendar_plot.save(filename='calendar_mapCOVID_SH2022.png', width=16, height=9, units="in", dpi=100)
     print(calendar_plot)
 
 
