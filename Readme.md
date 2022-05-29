@@ -39,7 +39,6 @@ table_info = tr[0].find_all('td')[0].text.replace('\t', '').replace('\n', '').sp
 2. transform to pandas dataframe
 
 3. save pandas dataframe data to sqltable,csv,xlsx,json
-   main code:
 
 ## plot data
 
