@@ -184,7 +184,7 @@ def plot_Covid19_SH_data(pd_data: pd.DataFrame):
                       + geom_area(aes(fill='COVID-19-Cases'), alpha=0.7, position='identity')
                       + geom_line(aes(color='COVID-19-Cases'), size=0.75)  # color='red'
                       + scale_x_date(date_labels="%m-%d", date_breaks='5 days')
-                      + scale_fill_hue(s=0.9, l=0.6, h=0.0617, color_space='husl') + xlab("2022@ShangHai")
+                      + scale_fill_hue(s=0.9, l=0.75, h=0.09, color_space='husl') + xlab("2022@ShangHai")
                       + ylab("Covid-19 Cases")) + \
                      theme(legend_position=(0.25, 0.75),
                            axis_title=element_text(size=20, face="plain", color="#ed4718"),
@@ -228,7 +228,7 @@ def calendar_map_Covid19data_SH(cal_data: pd.DataFrame):
     df['monthweek'] = df.groupby('monthf')['week'].apply(lambda x: x - x.min() + 1)
     calendar_plot = (ggplot(df, aes('weekdayf', 'monthweek', fill='value')) +
                      geom_tile(colour="white", size=0.1) +
-                     scale_fill_cmap(cmap_name='PuRd', name='New Cases') +
+                     scale_fill_cmap(cmap_name='OrRd', name='New Cases') +
                      geom_text(aes(label='day'), size=8) +
                      facet_wrap('~monthf', nrow=1) +
                      scale_y_reverse() +
