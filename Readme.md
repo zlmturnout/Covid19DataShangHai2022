@@ -1,5 +1,7 @@
 # Visualize Covid-19 cases in Shanghai from2022-03-01
 
+update ended in 4th July 2022
+
 ## Acquire the reported Covid-19 cases in SH
 
 1. Scrap data from [上海本地宝](http://m.sh.bendibao.com/)
