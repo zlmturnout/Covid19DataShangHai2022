@@ -25,7 +25,7 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(962, 650)
+        Dialog.resize(962, 639)
         self.gridLayout_4 = QGridLayout(Dialog)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.horizontalLayout_2 = QHBoxLayout()
@@ -351,13 +351,10 @@ class Ui_Dialog(object):
 
         self.Plot_frame = QFrame(Dialog)
         self.Plot_frame.setObjectName(u"Plot_frame")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.MinimumExpanding)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.Plot_frame.sizePolicy().hasHeightForWidth())
-        self.Plot_frame.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.Plot_frame.sizePolicy().hasHeightForWidth())
+        self.Plot_frame.setSizePolicy(sizePolicy2)
         self.Plot_frame.setMinimumSize(QSize(400, 300))
-        self.Plot_frame.setMaximumSize(QSize(800, 400))
+        self.Plot_frame.setMaximumSize(QSize(16777215, 1677215))
         self.Plot_frame.setFrameShape(QFrame.StyledPanel)
         self.Plot_frame.setFrameShadow(QFrame.Raised)
 
@@ -371,11 +368,11 @@ class Ui_Dialog(object):
 
         self.X_axis_cbx = QComboBox(Dialog)
         self.X_axis_cbx.setObjectName(u"X_axis_cbx")
-        sizePolicy4 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.X_axis_cbx.sizePolicy().hasHeightForWidth())
-        self.X_axis_cbx.setSizePolicy(sizePolicy4)
+        sizePolicy3 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.X_axis_cbx.sizePolicy().hasHeightForWidth())
+        self.X_axis_cbx.setSizePolicy(sizePolicy3)
         self.X_axis_cbx.setMinimumSize(QSize(60, 40))
         self.X_axis_cbx.setMaximumSize(QSize(16777215, 40))
         self.X_axis_cbx.setFont(font)
@@ -384,8 +381,8 @@ class Ui_Dialog(object):
 
         self.Y_axis_cbx = QComboBox(Dialog)
         self.Y_axis_cbx.setObjectName(u"Y_axis_cbx")
-        sizePolicy4.setHeightForWidth(self.Y_axis_cbx.sizePolicy().hasHeightForWidth())
-        self.Y_axis_cbx.setSizePolicy(sizePolicy4)
+        sizePolicy3.setHeightForWidth(self.Y_axis_cbx.sizePolicy().hasHeightForWidth())
+        self.Y_axis_cbx.setSizePolicy(sizePolicy3)
         self.Y_axis_cbx.setMinimumSize(QSize(60, 40))
         self.Y_axis_cbx.setMaximumSize(QSize(16777215, 40))
         self.Y_axis_cbx.setFont(font)

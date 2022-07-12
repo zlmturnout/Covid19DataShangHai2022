@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>962</width>
-    <height>650</height>
+    <height>639</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1089,7 +1089,7 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
        <item row="4" column="0">
         <widget class="QFrame" name="Plot_frame">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -1102,8 +1102,8 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
          </property>
          <property name="maximumSize">
           <size>
-           <width>800</width>
-           <height>400</height>
+           <width>16777215</width>
+           <height>1677215</height>
           </size>
          </property>
          <property name="frameShape">
