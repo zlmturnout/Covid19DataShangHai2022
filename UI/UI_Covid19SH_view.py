@@ -15,22 +15,62 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QGridLayout,
-    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
-    QPushButton, QSizePolicy, QSpacerItem, QTableView,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFrame,
+    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
+    QSplitter, QTableView, QTreeWidget, QTreeWidgetItem,
+    QWidget)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(1000, 650)
-        self.gridLayout = QGridLayout(Dialog)
+        Dialog.resize(962, 650)
+        self.gridLayout_4 = QGridLayout(Dialog)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.horizontalLayout_6 = QHBoxLayout()
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.verticalLayout_2 = QVBoxLayout()
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.Open_datebase_btn = QPushButton(Dialog)
+        self.Open_datebase_btn.setObjectName(u"Open_datebase_btn")
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.Open_datebase_btn.sizePolicy().hasHeightForWidth())
+        self.Open_datebase_btn.setSizePolicy(sizePolicy)
+        self.Open_datebase_btn.setMinimumSize(QSize(120, 40))
+        self.Open_datebase_btn.setMaximumSize(QSize(100, 40))
+        font = QFont()
+        font.setFamilies([u"Cambria"])
+        font.setPointSize(12)
+        font.setBold(True)
+        self.Open_datebase_btn.setFont(font)
+        self.Open_datebase_btn.setStyleSheet(u"QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);\n"
+"color: rgb(255, 255, 255);}\n"
+"\n"
+"QPushButton:hover{background-color:rgb(0, 170, 255);}\n"
+"\n"
+"QPushButton:pressed{background-color:rgb(255, 91, 58);}")
+
+        self.gridLayout.addWidget(self.Open_datebase_btn, 0, 0, 1, 1)
+
+        self.Update_database__btn = QPushButton(Dialog)
+        self.Update_database__btn.setObjectName(u"Update_database__btn")
+        sizePolicy.setHeightForWidth(self.Update_database__btn.sizePolicy().hasHeightForWidth())
+        self.Update_database__btn.setSizePolicy(sizePolicy)
+        self.Update_database__btn.setMinimumSize(QSize(80, 40))
+        self.Update_database__btn.setMaximumSize(QSize(100, 40))
+        self.Update_database__btn.setFont(font)
+        self.Update_database__btn.setStyleSheet(u"QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);\n"
+"color: rgb(255, 255, 255);}\n"
+"\n"
+"QPushButton:hover{background-color:rgb(0, 170, 255);}\n"
+"\n"
+"QPushButton:pressed{background-color:rgb(255, 91, 58);}")
+
+        self.gridLayout.addWidget(self.Update_database__btn, 0, 1, 1, 1)
+
         self.lineEdit = QLineEdit(Dialog)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setMinimumSize(QSize(300, 40))
@@ -46,70 +86,42 @@ class Ui_Dialog(object):
         brush2.setStyle(Qt.SolidPattern)
         palette.setBrush(QPalette.Disabled, QPalette.Text, brush2)
         self.lineEdit.setPalette(palette)
-        font = QFont()
-        font.setFamilies([u"Cambria"])
-        font.setPointSize(12)
-        font.setBold(True)
         self.lineEdit.setFont(font)
         self.lineEdit.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_2.addWidget(self.lineEdit)
+        self.gridLayout.addWidget(self.lineEdit, 0, 2, 1, 1)
 
-        self.tableView = QTableView(Dialog)
+        self.splitter = QSplitter(Dialog)
+        self.splitter.setObjectName(u"splitter")
+        self.splitter.setOrientation(Qt.Horizontal)
+        self.treeWidget = QTreeWidget(self.splitter)
+        self.treeWidget.headerItem().setText(0, "")
+        self.treeWidget.setObjectName(u"treeWidget")
+        sizePolicy1 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.treeWidget.sizePolicy().hasHeightForWidth())
+        self.treeWidget.setSizePolicy(sizePolicy1)
+        self.treeWidget.setMinimumSize(QSize(50, 400))
+        self.treeWidget.setMaximumSize(QSize(300, 16777215))
+        self.splitter.addWidget(self.treeWidget)
+        self.tableView = QTableView(self.splitter)
         self.tableView.setObjectName(u"tableView")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
+        self.tableView.setSizePolicy(sizePolicy2)
         self.tableView.setMinimumSize(QSize(300, 400))
+        self.splitter.addWidget(self.tableView)
 
-        self.verticalLayout_2.addWidget(self.tableView)
-
-        self.horizontalLayout_5 = QHBoxLayout()
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_5.addItem(self.horizontalSpacer_2)
-
-        self.Open_datebase_btn = QPushButton(Dialog)
-        self.Open_datebase_btn.setObjectName(u"Open_datebase_btn")
-        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.Open_datebase_btn.sizePolicy().hasHeightForWidth())
-        self.Open_datebase_btn.setSizePolicy(sizePolicy)
-        self.Open_datebase_btn.setMinimumSize(QSize(120, 40))
-        self.Open_datebase_btn.setMaximumSize(QSize(100, 40))
-        self.Open_datebase_btn.setFont(font)
-        self.Open_datebase_btn.setStyleSheet(u"QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);\n"
-"color: rgb(255, 255, 255);}\n"
-"\n"
-"QPushButton:hover{background-color:rgb(0, 170, 255);}\n"
-"\n"
-"QPushButton:pressed{background-color:rgb(255, 91, 58);}")
-
-        self.horizontalLayout_5.addWidget(self.Open_datebase_btn)
-
-        self.Update_database__btn = QPushButton(Dialog)
-        self.Update_database__btn.setObjectName(u"Update_database__btn")
-        sizePolicy.setHeightForWidth(self.Update_database__btn.sizePolicy().hasHeightForWidth())
-        self.Update_database__btn.setSizePolicy(sizePolicy)
-        self.Update_database__btn.setMinimumSize(QSize(120, 40))
-        self.Update_database__btn.setMaximumSize(QSize(100, 40))
-        self.Update_database__btn.setFont(font)
-        self.Update_database__btn.setStyleSheet(u"QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);\n"
-"color: rgb(255, 255, 255);}\n"
-"\n"
-"QPushButton:hover{background-color:rgb(0, 170, 255);}\n"
-"\n"
-"QPushButton:pressed{background-color:rgb(255, 91, 58);}")
-
-        self.horizontalLayout_5.addWidget(self.Update_database__btn)
+        self.gridLayout.addWidget(self.splitter, 1, 0, 1, 3)
 
 
-        self.verticalLayout_2.addLayout(self.horizontalLayout_5)
+        self.horizontalLayout_2.addLayout(self.gridLayout)
 
-
-        self.horizontalLayout_6.addLayout(self.verticalLayout_2)
-
-        self.verticalLayout = QVBoxLayout()
-        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.gridLayout_3 = QGridLayout()
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.label_6 = QLabel(Dialog)
         self.label_6.setObjectName(u"label_6")
         sizePolicy.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
@@ -136,10 +148,10 @@ class Ui_Dialog(object):
         self.label_6.setFont(font1)
         self.label_6.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout.addWidget(self.label_6)
+        self.gridLayout_3.addWidget(self.label_6, 0, 0, 1, 1)
 
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.gridLayout_2 = QGridLayout()
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label_5 = QLabel(Dialog)
         self.label_5.setObjectName(u"label_5")
         sizePolicy.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
@@ -168,7 +180,7 @@ class Ui_Dialog(object):
         self.label_5.setFrameShadow(QFrame.Sunken)
         self.label_5.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout.addWidget(self.label_5)
+        self.gridLayout_2.addWidget(self.label_5, 0, 0, 1, 1)
 
         self.label_2 = QLabel(Dialog)
         self.label_2.setObjectName(u"label_2")
@@ -190,7 +202,7 @@ class Ui_Dialog(object):
         self.label_2.setFont(font2)
         self.label_2.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout.addWidget(self.label_2)
+        self.gridLayout_2.addWidget(self.label_2, 0, 1, 1, 1)
 
         self.label_3 = QLabel(Dialog)
         self.label_3.setObjectName(u"label_3")
@@ -212,7 +224,7 @@ class Ui_Dialog(object):
         self.label_3.setFont(font2)
         self.label_3.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout.addWidget(self.label_3)
+        self.gridLayout_2.addWidget(self.label_3, 0, 2, 1, 1)
 
         self.label_4 = QLabel(Dialog)
         self.label_4.setObjectName(u"label_4")
@@ -234,13 +246,8 @@ class Ui_Dialog(object):
         self.label_4.setFont(font2)
         self.label_4.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout.addWidget(self.label_4)
+        self.gridLayout_2.addWidget(self.label_4, 0, 3, 1, 1)
 
-
-        self.verticalLayout.addLayout(self.horizontalLayout)
-
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.Select_date_btn = QPushButton(Dialog)
         self.Select_date_btn.setObjectName(u"Select_date_btn")
         sizePolicy.setHeightForWidth(self.Select_date_btn.sizePolicy().hasHeightForWidth())
@@ -255,7 +262,7 @@ class Ui_Dialog(object):
 "\n"
 "QPushButton:pressed{background-color:rgb(255, 91, 58);}")
 
-        self.horizontalLayout_2.addWidget(self.Select_date_btn)
+        self.gridLayout_2.addWidget(self.Select_date_btn, 1, 0, 1, 1)
 
         self.Infection_input = QLineEdit(Dialog)
         self.Infection_input.setObjectName(u"Infection_input")
@@ -268,7 +275,7 @@ class Ui_Dialog(object):
         self.Infection_input.setFont(font3)
         self.Infection_input.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout_2.addWidget(self.Infection_input)
+        self.gridLayout_2.addWidget(self.Infection_input, 1, 1, 1, 1)
 
         self.Asymptom_input = QLineEdit(Dialog)
         self.Asymptom_input.setObjectName(u"Asymptom_input")
@@ -280,7 +287,7 @@ class Ui_Dialog(object):
         self.Asymptom_input.setFont(font4)
         self.Asymptom_input.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout_2.addWidget(self.Asymptom_input)
+        self.gridLayout_2.addWidget(self.Asymptom_input, 1, 2, 1, 1)
 
         self.Death_input = QLineEdit(Dialog)
         self.Death_input.setObjectName(u"Death_input")
@@ -289,19 +296,17 @@ class Ui_Dialog(object):
         self.Death_input.setFont(font4)
         self.Death_input.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout_2.addWidget(self.Death_input)
+        self.gridLayout_2.addWidget(self.Death_input, 1, 3, 1, 1)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout_2)
+        self.gridLayout_3.addLayout(self.gridLayout_2, 1, 0, 1, 1)
 
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalSpacer = QSpacerItem(188, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout_4.addItem(self.horizontalSpacer)
+        self.horizontalLayout.addItem(self.horizontalSpacer)
 
-        self.horizontalLayout_3 = QHBoxLayout()
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.Confirm_btn = QPushButton(Dialog)
         self.Confirm_btn.setObjectName(u"Confirm_btn")
         sizePolicy.setHeightForWidth(self.Confirm_btn.sizePolicy().hasHeightForWidth())
@@ -316,7 +321,7 @@ class Ui_Dialog(object):
 "\n"
 "QPushButton:pressed{background-color:rgb(255, 91, 58);}")
 
-        self.horizontalLayout_3.addWidget(self.Confirm_btn)
+        self.horizontalLayout.addWidget(self.Confirm_btn)
 
         self.Cancel_btn = QPushButton(Dialog)
         self.Cancel_btn.setObjectName(u"Cancel_btn")
@@ -332,33 +337,85 @@ class Ui_Dialog(object):
 "\n"
 "QPushButton:pressed{background-color:rgb(255, 91, 58);}")
 
-        self.horizontalLayout_3.addWidget(self.Cancel_btn)
+        self.horizontalLayout.addWidget(self.Cancel_btn)
 
 
-        self.horizontalLayout_4.addLayout(self.horizontalLayout_3)
+        self.gridLayout_3.addLayout(self.horizontalLayout, 2, 0, 1, 1)
 
+        self.line = QFrame(Dialog)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setFrameShadow(QFrame.Sunken)
 
-        self.verticalLayout.addLayout(self.horizontalLayout_4)
+        self.gridLayout_3.addWidget(self.line, 3, 0, 1, 1)
 
         self.Plot_frame = QFrame(Dialog)
         self.Plot_frame.setObjectName(u"Plot_frame")
-        sizePolicy1 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.Plot_frame.sizePolicy().hasHeightForWidth())
-        self.Plot_frame.setSizePolicy(sizePolicy1)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.MinimumExpanding)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.Plot_frame.sizePolicy().hasHeightForWidth())
+        self.Plot_frame.setSizePolicy(sizePolicy3)
         self.Plot_frame.setMinimumSize(QSize(400, 300))
-        self.Plot_frame.setMaximumSize(QSize(500, 16777215))
+        self.Plot_frame.setMaximumSize(QSize(800, 400))
         self.Plot_frame.setFrameShape(QFrame.StyledPanel)
         self.Plot_frame.setFrameShadow(QFrame.Raised)
 
-        self.verticalLayout.addWidget(self.Plot_frame)
+        self.gridLayout_3.addWidget(self.Plot_frame, 4, 0, 1, 1)
+
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalSpacer_2 = QSpacerItem(68, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_6.addItem(self.horizontalSpacer_2)
+
+        self.X_axis_cbx = QComboBox(Dialog)
+        self.X_axis_cbx.setObjectName(u"X_axis_cbx")
+        sizePolicy4 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.X_axis_cbx.sizePolicy().hasHeightForWidth())
+        self.X_axis_cbx.setSizePolicy(sizePolicy4)
+        self.X_axis_cbx.setMinimumSize(QSize(60, 40))
+        self.X_axis_cbx.setMaximumSize(QSize(16777215, 40))
+        self.X_axis_cbx.setFont(font)
+
+        self.horizontalLayout_6.addWidget(self.X_axis_cbx)
+
+        self.Y_axis_cbx = QComboBox(Dialog)
+        self.Y_axis_cbx.setObjectName(u"Y_axis_cbx")
+        sizePolicy4.setHeightForWidth(self.Y_axis_cbx.sizePolicy().hasHeightForWidth())
+        self.Y_axis_cbx.setSizePolicy(sizePolicy4)
+        self.Y_axis_cbx.setMinimumSize(QSize(60, 40))
+        self.Y_axis_cbx.setMaximumSize(QSize(16777215, 40))
+        self.Y_axis_cbx.setFont(font)
+
+        self.horizontalLayout_6.addWidget(self.Y_axis_cbx)
+
+        self.Plot_database__btn = QPushButton(Dialog)
+        self.Plot_database__btn.setObjectName(u"Plot_database__btn")
+        sizePolicy.setHeightForWidth(self.Plot_database__btn.sizePolicy().hasHeightForWidth())
+        self.Plot_database__btn.setSizePolicy(sizePolicy)
+        self.Plot_database__btn.setMinimumSize(QSize(100, 40))
+        self.Plot_database__btn.setMaximumSize(QSize(100, 40))
+        self.Plot_database__btn.setFont(font1)
+        self.Plot_database__btn.setStyleSheet(u"QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);\n"
+"color: rgb(255, 255, 255);}\n"
+"\n"
+"QPushButton:hover{background-color:rgb(0, 170, 255);}\n"
+"\n"
+"QPushButton:pressed{background-color:rgb(255, 91, 58);}")
+
+        self.horizontalLayout_6.addWidget(self.Plot_database__btn)
 
 
-        self.horizontalLayout_6.addLayout(self.verticalLayout)
+        self.gridLayout_3.addLayout(self.horizontalLayout_6, 5, 0, 1, 1)
 
 
-        self.gridLayout.addLayout(self.horizontalLayout_6, 0, 0, 1, 1)
+        self.horizontalLayout_2.addLayout(self.gridLayout_3)
+
+
+        self.gridLayout_4.addLayout(self.horizontalLayout_2, 0, 0, 1, 1)
 
 
         self.retranslateUi(Dialog)
@@ -368,10 +425,10 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
+        self.Open_datebase_btn.setText(QCoreApplication.translate("Dialog", u"Open database", None))
+        self.Update_database__btn.setText(QCoreApplication.translate("Dialog", u"Update", None))
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("Dialog", u"Sqlite database file", None))
-        self.Open_datebase_btn.setText(QCoreApplication.translate("Dialog", u"Open database", None))
-        self.Update_database__btn.setText(QCoreApplication.translate("Dialog", u"Update&&Plot", None))
         self.label_6.setText(QCoreApplication.translate("Dialog", u"Input daily report", None))
         self.label_5.setText(QCoreApplication.translate("Dialog", u"Date", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"Infection", None))
@@ -383,5 +440,12 @@ class Ui_Dialog(object):
         self.Death_input.setText(QCoreApplication.translate("Dialog", u"0", None))
         self.Confirm_btn.setText(QCoreApplication.translate("Dialog", u"add", None))
         self.Cancel_btn.setText(QCoreApplication.translate("Dialog", u"Cancel", None))
+#if QT_CONFIG(tooltip)
+        self.X_axis_cbx.setToolTip(QCoreApplication.translate("Dialog", u"X axis", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.Y_axis_cbx.setToolTip(QCoreApplication.translate("Dialog", u"Y axis", None))
+#endif // QT_CONFIG(tooltip)
+        self.Plot_database__btn.setText(QCoreApplication.translate("Dialog", u"Plot", None))
     # retranslateUi
 

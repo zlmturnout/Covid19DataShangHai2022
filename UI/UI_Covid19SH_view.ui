@@ -6,19 +6,99 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
+    <width>962</width>
     <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="gridLayout_4">
    <item row="0" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_6">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="Open_datebase_btn">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Cambria</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);
+color: rgb(255, 255, 255);}
+
+QPushButton:hover{background-color:rgb(0, 170, 255);}
+
+QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
+         </property>
+         <property name="text">
+          <string>Open database</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="Update_database__btn">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Cambria</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);
+color: rgb(255, 255, 255);}
+
+QPushButton:hover{background-color:rgb(0, 170, 255);}
+
+QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
+         </property>
+         <property name="text">
+          <string>Update</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
         <widget class="QLineEdit" name="lineEdit">
          <property name="minimumSize">
           <size>
@@ -87,118 +167,57 @@
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QTableView" name="tableView">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>400</height>
-          </size>
+       <item row="1" column="0" colspan="3">
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
+         <widget class="QTreeWidget" name="treeWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>400</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <column>
+           <property name="text">
+            <string/>
+           </property>
+          </column>
+         </widget>
+         <widget class="QTableView" name="tableView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>300</width>
+            <height>400</height>
+           </size>
+          </property>
+         </widget>
         </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="Open_datebase_btn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>120</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Cambria</family>
-             <pointsize>12</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);
-color: rgb(255, 255, 255);}
-
-QPushButton:hover{background-color:rgb(0, 170, 255);}
-
-QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
-           </property>
-           <property name="text">
-            <string>Open database</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="Update_database__btn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>120</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Cambria</family>
-             <pointsize>12</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);
-color: rgb(255, 255, 255);}
-
-QPushButton:hover{background-color:rgb(0, 170, 255);}
-
-QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
-           </property>
-           <property name="text">
-            <string>Update&amp;&amp;Plot</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </item>
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
         <widget class="QLabel" name="label_6">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -324,9 +343,9 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
          </property>
         </widget>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
+       <item row="1" column="0">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
           <widget class="QLabel" name="label_5">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -458,7 +477,7 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
            </property>
           </widget>
          </item>
-         <item>
+         <item row="0" column="1">
           <widget class="QLabel" name="label_2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -584,7 +603,7 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
            </property>
           </widget>
          </item>
-         <item>
+         <item row="0" column="2">
           <widget class="QLabel" name="label_3">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -710,7 +729,7 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
            </property>
           </widget>
          </item>
-         <item>
+         <item row="0" column="3">
           <widget class="QLabel" name="label_4">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -836,11 +855,7 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
            </property>
           </widget>
          </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
+         <item row="1" column="0">
           <widget class="QPushButton" name="Select_date_btn">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -880,7 +895,7 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
            </property>
           </widget>
          </item>
-         <item>
+         <item row="1" column="1">
           <widget class="QLineEdit" name="Infection_input">
            <property name="minimumSize">
             <size>
@@ -909,7 +924,7 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
            </property>
           </widget>
          </item>
-         <item>
+         <item row="1" column="2">
           <widget class="QLineEdit" name="Asymptom_input">
            <property name="minimumSize">
             <size>
@@ -937,7 +952,7 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
            </property>
           </widget>
          </item>
-         <item>
+         <item row="1" column="3">
           <widget class="QLineEdit" name="Death_input">
            <property name="minimumSize">
             <size>
@@ -967,8 +982,8 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
          </item>
         </layout>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item row="2" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
@@ -983,95 +998,98 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
           </spacer>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QPushButton" name="Confirm_btn">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Cambria</family>
-               <pointsize>12</pointsize>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);
+          <widget class="QPushButton" name="Confirm_btn">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);
 color: rgb(255, 255, 255);}
 
 QPushButton:hover{background-color:rgb(0, 170, 255);}
 
 QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
-             </property>
-             <property name="text">
-              <string>add</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="Cancel_btn">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Cambria</family>
-               <pointsize>12</pointsize>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);
+           </property>
+           <property name="text">
+            <string>add</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Cancel_btn">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);
 color: rgb(255, 255, 255);}
 
 QPushButton:hover{background-color:rgb(0, 170, 255);}
 
 QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
-             </property>
-             <property name="text">
-              <string>Cancel</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+           </property>
+           <property name="text">
+            <string>Cancel</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
-       <item>
+       <item row="3" column="0">
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
         <widget class="QFrame" name="Plot_frame">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+          <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -1084,8 +1102,8 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
          </property>
          <property name="maximumSize">
           <size>
-           <width>500</width>
-           <height>16777215</height>
+           <width>800</width>
+           <height>400</height>
           </size>
          </property>
          <property name="frameShape">
@@ -1095,6 +1113,127 @@ QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
           <enum>QFrame::Raised</enum>
          </property>
         </widget>
+       </item>
+       <item row="5" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>68</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QComboBox" name="X_axis_cbx">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>X axis</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="Y_axis_cbx">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>12</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Y axis</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Plot_database__btn">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Cambria</family>
+             <pointsize>14</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);
+color: rgb(255, 255, 255);}
+
+QPushButton:hover{background-color:rgb(0, 170, 255);}
+
+QPushButton:pressed{background-color:rgb(255, 91, 58);}</string>
+           </property>
+           <property name="text">
+            <string>Plot</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>
