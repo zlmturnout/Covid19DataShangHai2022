@@ -158,7 +158,7 @@ def create_Covid19_SH_sql(db_path, db_name: str = 'Covid19_SH_db.db', table_name
     sql_db = os.path.join(db_path, db_name)
     cxn = sqlite3.connect(sql_db)
     cursor = cxn.cursor()
-    sql_table = f'CREATE TABLE IF NOT EXISTS Fund{table_name} (ID integer primary key autoincrement,Date text UNIQUE,' \
+    sql_table = f'CREATE TABLE IF NOT EXISTS Fund{table_name} (id integer primary key autoincrement,Date text UNIQUE,' \
                 f'NewInfection integer,AllInfection integer,' \
                 f'NewAsymptomatic integer,AllAsymptomatic integer,Death,integer) '
     try:
@@ -270,41 +270,5 @@ if __name__ == '__main__':
 
     # calendar plot pd_NewCases
     calendar_map_Covid19data_SH(pd_NewCases)
-    # df = pd.melt(pd_NewCases, id_vars=['Date'], var_name='variable', value_name='value')
-    # df['Date'] = [datetime.datetime.strptime(d, "%Y-%m-%d").date() for d in df['Date']]
-    # df['year'] = [d.year for d in df['Date']]
-    # df = df[df['year'] == 2022]
-    # df['month'] = [d.month for d in df['Date']]
-    # month_label = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    # df['monthf'] = df['month'].replace(np.arange(1, 13, 1), month_label)
-    # from pandas.api.types import CategoricalDtype
-    #
-    # cat_dtype = CategoricalDtype(categories=month_label, ordered=True)
-    # df['monthf'] = df['monthf'].astype(cat_dtype)
-    # df['week'] = [int(d.strftime('%W')) for d in df['Date']]
-    # df['weekay'] = [int(d.strftime('%u')) for d in df['Date']]
-    # week_label = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    # df['weekdayf'] = df['weekay'].replace(np.arange(1, 8, 1), week_label)
-    # catWeek_dtype = CategoricalDtype(categories=week_label, ordered=True)
-    # df['weekdayf'] = df['weekdayf'].astype(catWeek_dtype)
-    # df['day'] = [d.strftime('%d') for d in df['Date']]
-    # df['monthweek'] = df.groupby('monthf')['week'].apply(lambda x: x - x.min() + 1)
-    # base_plot = (ggplot(df, aes('weekdayf', 'monthweek', fill='value')) +
-    #              geom_tile(colour="white", size=0.1) +
-    #              scale_fill_cmap(cmap_name='OrRd', name='Asymptomatic') +
-    #              geom_text(aes(label='day'), size=8) +
-    #              facet_wrap('~monthf', nrow=1) +
-    #              scale_y_reverse() +
-    #              xlab("COVID-19 2022@ShangHai") + ylab("Week") +
-    #              theme(strip_text=element_text(size=11, face="plain", color="black"),
-    #                    text=element_text(family="SimHei"),
-    #                    axis_title=element_text(size=14, face="plain", color="deepskyblue"),
-    #                    axis_text=element_text(size=8, face="plain", color="#E7298A"),
-    #                    legend_position='left',
-    #                    legend_background=element_blank(),
-    #                    aspect_ratio=0.85,
-    #                    figure_size=(8, 4),
-    #                    dpi=100))
-    #
-    # print(base_plot)
+    
     print('get data  and plot done')
