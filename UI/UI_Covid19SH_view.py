@@ -18,49 +18,34 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFrame,
     QGridLayout, QHBoxLayout, QHeaderView, QLabel,
     QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
-    QSplitter, QTableView, QTreeWidget, QTreeWidgetItem,
-    QWidget)
+    QSplitter, QTableView, QWidget)
+
+from sqltreewidget import SqlTreeWidget
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(962, 639)
+        Dialog.resize(1008, 668)
         self.gridLayout_4 = QGridLayout(Dialog)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.Open_datebase_btn = QPushButton(Dialog)
-        self.Open_datebase_btn.setObjectName(u"Open_datebase_btn")
+        self.Update_database__btn = QPushButton(Dialog)
+        self.Update_database__btn.setObjectName(u"Update_database__btn")
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.Open_datebase_btn.sizePolicy().hasHeightForWidth())
-        self.Open_datebase_btn.setSizePolicy(sizePolicy)
-        self.Open_datebase_btn.setMinimumSize(QSize(120, 40))
-        self.Open_datebase_btn.setMaximumSize(QSize(100, 40))
-        font = QFont()
-        font.setFamilies([u"Cambria"])
-        font.setPointSize(12)
-        font.setBold(True)
-        self.Open_datebase_btn.setFont(font)
-        self.Open_datebase_btn.setStyleSheet(u"QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);\n"
-"color: rgb(255, 255, 255);}\n"
-"\n"
-"QPushButton:hover{background-color:rgb(0, 170, 255);}\n"
-"\n"
-"QPushButton:pressed{background-color:rgb(255, 91, 58);}")
-
-        self.gridLayout.addWidget(self.Open_datebase_btn, 0, 0, 1, 1)
-
-        self.Update_database__btn = QPushButton(Dialog)
-        self.Update_database__btn.setObjectName(u"Update_database__btn")
         sizePolicy.setHeightForWidth(self.Update_database__btn.sizePolicy().hasHeightForWidth())
         self.Update_database__btn.setSizePolicy(sizePolicy)
         self.Update_database__btn.setMinimumSize(QSize(80, 40))
         self.Update_database__btn.setMaximumSize(QSize(100, 40))
+        font = QFont()
+        font.setFamilies([u"Cambria"])
+        font.setPointSize(12)
+        font.setBold(True)
         self.Update_database__btn.setFont(font)
         self.Update_database__btn.setStyleSheet(u"QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);\n"
 "color: rgb(255, 255, 255);}\n"
@@ -70,6 +55,22 @@ class Ui_Dialog(object):
 "QPushButton:pressed{background-color:rgb(255, 91, 58);}")
 
         self.gridLayout.addWidget(self.Update_database__btn, 0, 1, 1, 1)
+
+        self.Open_datebase_btn = QPushButton(Dialog)
+        self.Open_datebase_btn.setObjectName(u"Open_datebase_btn")
+        sizePolicy.setHeightForWidth(self.Open_datebase_btn.sizePolicy().hasHeightForWidth())
+        self.Open_datebase_btn.setSizePolicy(sizePolicy)
+        self.Open_datebase_btn.setMinimumSize(QSize(120, 40))
+        self.Open_datebase_btn.setMaximumSize(QSize(100, 40))
+        self.Open_datebase_btn.setFont(font)
+        self.Open_datebase_btn.setStyleSheet(u"QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);\n"
+"color: rgb(255, 255, 255);}\n"
+"\n"
+"QPushButton:hover{background-color:rgb(0, 170, 255);}\n"
+"\n"
+"QPushButton:pressed{background-color:rgb(255, 91, 58);}")
+
+        self.gridLayout.addWidget(self.Open_datebase_btn, 0, 0, 1, 1)
 
         self.lineEdit = QLineEdit(Dialog)
         self.lineEdit.setObjectName(u"lineEdit")
@@ -94,24 +95,18 @@ class Ui_Dialog(object):
         self.splitter = QSplitter(Dialog)
         self.splitter.setObjectName(u"splitter")
         self.splitter.setOrientation(Qt.Horizontal)
-        self.treeWidget = QTreeWidget(self.splitter)
-        self.treeWidget.headerItem().setText(0, "")
-        self.treeWidget.setObjectName(u"treeWidget")
-        sizePolicy1 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Expanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.treeWidget.sizePolicy().hasHeightForWidth())
-        self.treeWidget.setSizePolicy(sizePolicy1)
-        self.treeWidget.setMinimumSize(QSize(50, 400))
-        self.treeWidget.setMaximumSize(QSize(300, 16777215))
-        self.splitter.addWidget(self.treeWidget)
+        self.treeView = SqlTreeWidget(self.splitter)
+        self.treeView.setObjectName(u"treeView")
+        self.treeView.setMinimumSize(QSize(50, 400))
+        self.treeView.setMaximumSize(QSize(300, 16777215))
+        self.splitter.addWidget(self.treeView)
         self.tableView = QTableView(self.splitter)
         self.tableView.setObjectName(u"tableView")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
-        self.tableView.setSizePolicy(sizePolicy2)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
+        self.tableView.setSizePolicy(sizePolicy1)
         self.tableView.setMinimumSize(QSize(300, 400))
         self.splitter.addWidget(self.tableView)
 
@@ -313,7 +308,7 @@ class Ui_Dialog(object):
         self.Confirm_btn.setSizePolicy(sizePolicy)
         self.Confirm_btn.setMinimumSize(QSize(100, 40))
         self.Confirm_btn.setMaximumSize(QSize(100, 40))
-        self.Confirm_btn.setFont(font)
+        self.Confirm_btn.setFont(font1)
         self.Confirm_btn.setStyleSheet(u"QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);\n"
 "color: rgb(255, 255, 255);}\n"
 "\n"
@@ -329,7 +324,7 @@ class Ui_Dialog(object):
         self.Cancel_btn.setSizePolicy(sizePolicy)
         self.Cancel_btn.setMinimumSize(QSize(100, 40))
         self.Cancel_btn.setMaximumSize(QSize(100, 40))
-        self.Cancel_btn.setFont(font)
+        self.Cancel_btn.setFont(font1)
         self.Cancel_btn.setStyleSheet(u"QPushButton{background-color: rgb(0, 170, 127);selection-color: rgb(255, 85, 127);\n"
 "color: rgb(255, 255, 255);}\n"
 "\n"
@@ -351,8 +346,8 @@ class Ui_Dialog(object):
 
         self.Plot_frame = QFrame(Dialog)
         self.Plot_frame.setObjectName(u"Plot_frame")
-        sizePolicy2.setHeightForWidth(self.Plot_frame.sizePolicy().hasHeightForWidth())
-        self.Plot_frame.setSizePolicy(sizePolicy2)
+        sizePolicy1.setHeightForWidth(self.Plot_frame.sizePolicy().hasHeightForWidth())
+        self.Plot_frame.setSizePolicy(sizePolicy1)
         self.Plot_frame.setMinimumSize(QSize(400, 300))
         self.Plot_frame.setMaximumSize(QSize(16777215, 1677215))
         self.Plot_frame.setFrameShape(QFrame.StyledPanel)
@@ -368,11 +363,11 @@ class Ui_Dialog(object):
 
         self.X_axis_cbx = QComboBox(Dialog)
         self.X_axis_cbx.setObjectName(u"X_axis_cbx")
-        sizePolicy3 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.X_axis_cbx.sizePolicy().hasHeightForWidth())
-        self.X_axis_cbx.setSizePolicy(sizePolicy3)
+        sizePolicy2 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.X_axis_cbx.sizePolicy().hasHeightForWidth())
+        self.X_axis_cbx.setSizePolicy(sizePolicy2)
         self.X_axis_cbx.setMinimumSize(QSize(60, 40))
         self.X_axis_cbx.setMaximumSize(QSize(16777215, 40))
         self.X_axis_cbx.setFont(font)
@@ -381,8 +376,8 @@ class Ui_Dialog(object):
 
         self.Y_axis_cbx = QComboBox(Dialog)
         self.Y_axis_cbx.setObjectName(u"Y_axis_cbx")
-        sizePolicy3.setHeightForWidth(self.Y_axis_cbx.sizePolicy().hasHeightForWidth())
-        self.Y_axis_cbx.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.Y_axis_cbx.sizePolicy().hasHeightForWidth())
+        self.Y_axis_cbx.setSizePolicy(sizePolicy2)
         self.Y_axis_cbx.setMinimumSize(QSize(60, 40))
         self.Y_axis_cbx.setMaximumSize(QSize(16777215, 40))
         self.Y_axis_cbx.setFont(font)
@@ -422,8 +417,8 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
-        self.Open_datebase_btn.setText(QCoreApplication.translate("Dialog", u"Open database", None))
         self.Update_database__btn.setText(QCoreApplication.translate("Dialog", u"Update", None))
+        self.Open_datebase_btn.setText(QCoreApplication.translate("Dialog", u"Open database", None))
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("Dialog", u"Sqlite database file", None))
         self.label_6.setText(QCoreApplication.translate("Dialog", u"Input daily report", None))
