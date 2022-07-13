@@ -3,7 +3,6 @@ from calendar import c
 from re import I, S
 from tkinter import E
 
-from yaml import emit
 
 from sqlalchemy import false
 from PySide6.QtCore import Qt,QMetaObject,Signal,Slot
@@ -100,7 +99,7 @@ class SqlTreeWidget(QWidget):
         self.active_db=QSqlDatabase.connectionNames()[self.tree.indexOfTopLevelItem(item)]
     
     def currentDatabase(self):
-        print(f'current active database:{self.active_db}')
+        #print(f'current active database:{self.active_db}')
         self.current_db=QSqlDatabase.database(self.active_db)
         return self.current_db
             
