@@ -232,10 +232,10 @@ class VieWDataCovid19SH(QWidget,Ui_Dialog):
         self.X_axis_cbx.clear()
         self.Y_axis_cbx.clear() 
         # get all headers in the actived table
-        primary_Vals=Table_model.primaryValues(0)
-        for i in range(primary_Vals.count()):
-            field_name=primary_Vals.field(i).name()
-            value=primary_Vals.field(i).value()
+        sql_record=Table_model.record(0)
+        for i in range(sql_record.count()):
+            field_name=sql_record.field(i).name()
+            value=sql_record.field(i).value()
             print(f'field name: {field_name}\nvalue: {value}')
             self.X_axis_cbx.addItem(str(field_name))
             self.Y_axis_cbx.addItem(str(field_name))
