@@ -1,3 +1,4 @@
+from itertools import count
 import os,sys,time,datetime,traceback
 from re import M, S
 
@@ -281,23 +282,19 @@ class VieWDataCovid19SH(QWidget,Ui_Dialog):
             self.XYmapper.setYColumn(Y_column_idx)
             self.XYmapper.setSeries(self.line_series)
             self.XYmapper.setModel(table_model)
-            # # set plot axis
-            # if self.plot_once_flag==1:
-            #     self.linechart.removeAxis(self.X_axis)
-            #     self.linechart.removeAxis(self.Y_axis)
-            #     self.X_axis.setTitleText(self.X_axis_cbx.currentText())
-            #     self.Y_axis.setTitleText(self.Y_axis_cbx.currentText())
-            #     self.linechart.addAxis(self.X_axis,Qt.AlignBottom)
-            #     self.linechart.addAxis(self.Y_axis,Qt.AlignLeft)
-            # else:
-            #     #add X/Y axis
-            #     self.line_series.attachAxis(self.X_axis)
-            #     self.line_series.attachAxis(self.Y_axis)
-            #     self.plot_once_flag=1
-            # add line series to chart
+            x_min=0
+            x_max=0
+            y_min=0
+            y_max=0
+            for i in range(self.line_series.count()):
+                x_min=self.line_series.at(i).x() if self.line_series.at(i).x()<x_min else x_min
+                y_min=self.line_series.at(i).y() if self.line_series.at(i).y()<y_min else y_min
+                x_max=self.line_series.at(i).x() if self.line_series.at(i).x()>x_max else x_max
+                y_max=self.line_series.at(i).y() if self.line_series.at(i).y()>y_max else y_max
+            
             if self.plot_once_flag==0:
                 self.linechart.addSeries(self.line_series)
-                self.linechart.createDefaultAxes()
+                #self.linechart.createDefaultAxes()
                 self.plot_once_flag=1
             else:
                 self.linechart.removeSeries(self.line_series)
@@ -307,8 +304,10 @@ class VieWDataCovid19SH(QWidget,Ui_Dialog):
                 # print(self.X_axis_cbx.currentText())
                 # print(self.Y_axis_cbx.currentText())
                 
-                
-                
+                print(f'x_max:{self.X_axis.max()}\nx_min:{self.X_axis.min()}\n')
+                print(f'y_max:{self.Y_axis.max()}\ny_min:{self.Y_axis.min()}\n')
+                self.X_axis.setRange(x_min, x_max)
+                self.Y_axis.setRange(y_min, y_max)
                 #self.line_series.attachAxis(self.X_axis)
                 #self.line_series.attachAxis(self.Y_axis)
                 self.linechart.addSeries(self.line_series)
