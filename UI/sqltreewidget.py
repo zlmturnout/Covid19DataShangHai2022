@@ -1,6 +1,9 @@
 
 from calendar import c
 from re import I, S
+from tkinter import E
+
+from yaml import emit
 
 from sqlalchemy import false
 from PySide6.QtCore import Qt,QMetaObject,Signal,Slot
@@ -33,7 +36,7 @@ class SqlTreeWidget(QWidget):
         self.setContextMenuPolicy(Qt.ActionsContextMenu)
         QMetaObject.connectSlotsByName(self)
         # current database
-        self.current_database=QSqlDatabase()
+        self.current_db=''
         self.active_db=''
     
     @staticmethod
@@ -88,7 +91,7 @@ class SqlTreeWidget(QWidget):
         """
         for i in range(self.tree.topLevelItemCount()):
             if self.tree.topLevelItem(i).font(0).bold():
-                self.setBold(self.tree.topLevelItem(i),false)
+                self.setBold(self.tree.topLevelItem(i),False)
         
         # noothing to set
         if not item:
@@ -97,9 +100,11 @@ class SqlTreeWidget(QWidget):
         self.active_db=QSqlDatabase.connectionNames()[self.tree.indexOfTopLevelItem(item)]
     
     def currentDatabase(self):
-        return QSqlDatabase.database(self.active_db)
+        print(f'current active database:{self.active_db}')
+        self.current_db=QSqlDatabase.database(self.active_db)
+        return self.current_db
             
-    @Slot()
+    @Slot(QTreeWidgetItem,int)
     def on_tree_itemActivated(self,item:QTreeWidgetItem,n:int):
         """ tree item activated event process
         emit table item activated signal if get table
@@ -123,6 +128,9 @@ class SqlTreeWidget(QWidget):
         self.set_db_active(current_item.parent())
         self.requestMetaData_sig.emit(current_item.text(0))
     
-    @Slot()
+    @Slot(QTreeWidgetItem,QTreeWidgetItem)
     def on_tree_currentItemChanged(self,currentItem:QTreeWidgetItem,previousitem:QTreeWidgetItem):
-        self.metadataAction.setEnabled(currentItem and currentItem.parent())
+        if currentItem and currentItem.parent():
+            self.metadataAction.setEnabled(True)
+        else:
+            self.metadataAction.setEnabled(False)
