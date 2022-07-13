@@ -297,14 +297,25 @@ class VieWDataCovid19SH(QWidget,Ui_Dialog):
             # add line series to chart
             if self.plot_once_flag==0:
                 self.linechart.addSeries(self.line_series)
+                self.linechart.createDefaultAxes()
                 self.plot_once_flag=1
             else:
-                #self.linechart.removeAxis()
-                self.linechart.removeAxis()
-                self.linechart.createDefaultAxes()
+                self.linechart.removeSeries(self.line_series)
+                self.linechart.removeAxis(self.X_axis)
+                self.linechart.removeAxis(self.Y_axis)
+                
+                # print(self.X_axis_cbx.currentText())
+                # print(self.Y_axis_cbx.currentText())
+                
+                
+                
+                #self.line_series.attachAxis(self.X_axis)
+                #self.line_series.attachAxis(self.Y_axis)
+                self.linechart.addSeries(self.line_series)
+                self.linechart.addAxis(self.X_axis,Qt.AlignBottom)
+                self.linechart.addAxis(self.Y_axis,Qt.AlignLeft)
                 self.X_axis.setTitleText(self.X_axis_cbx.currentText())
                 self.Y_axis.setTitleText(self.Y_axis_cbx.currentText())
-                pass
             
             # #add chart to chartView
             # self.chartView.setChart(self.linechart)
