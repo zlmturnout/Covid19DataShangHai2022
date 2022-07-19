@@ -1,6 +1,8 @@
 import os,sys,time,datetime,traceback
-from re import X
-from tkinter import E, Y
+import re
+
+from matplotlib.pyplot import table
+
 # QT for python import
 import PySide6
 from PySide6.QtCore import QTimer, Slot, QThread, Signal, Qt,QTime,QDate,QDateTime
@@ -16,6 +18,9 @@ from PySide6.QtCharts import QLineSeries,QVXYModelMapper,QChartView,QChart,QValu
 import sqlite3
 import numpy as np
 import pandas as pd
+# matplotlib
+from matplotlib.backends.backend_qtagg import(FigureCanvas, NavigationToolbar2QT as NavigationToolbar)
+from matplotlib.figure import Figure
 # UI import
 from UI.UI_select_calendar import Ui_Form
 from UI.UI_Covid19SH_view import Ui_Dialog
@@ -133,6 +138,7 @@ class VieWDataCovid19SH(QWidget,Ui_Dialog):
 		self.Select_date_btn.clicked.connect(self.get_input_date)
 		self.__init__sqlconnection()
 		self.__init__plot()
+		self.__init__matplotlib()
 
 	# **************************************VerTicaL@zlm**************************************
 	# start of  data input  part
@@ -243,7 +249,7 @@ class VieWDataCovid19SH(QWidget,Ui_Dialog):
 	# end of SQL data  part
 	# **************************************VerTicaL@zlm**************************************
 	# **************************************VerTicaL@zlm**************************************
-	#  start of SQL data plot part
+	#  start of SQL data plot part by Qt
 
 	def __init__plot(self):
 		self.linechart = QChart()
@@ -260,13 +266,19 @@ class VieWDataCovid19SH(QWidget,Ui_Dialog):
 		self.plot_once_flag=0
 		#add chart to chartView
 		self.chartView.setChart(self.linechart)
-		self.Plot_gridlayout.addWidget(self.chartView)
+		#self.Plot_gridlayout.addWidget(self.chartView)
 
 
 	@Slot()
 	def on_Plot_database__btn_clicked(self):
 		"""plot data by selected X/Y axis cbx
 		"""
+		#self.Qt_lineplot()
+		self.matplotlib_lineplot()
+
+	def Qt_lineplot(self):
+		"""plot table data by Qt"""
+
 		table_model=self.tableView.model()
 		#self.line_series.clear()
 		if self.X_axis_cbx.count() != 0 and self.Y_axis_cbx.count()!=0:
@@ -353,6 +365,66 @@ class VieWDataCovid19SH(QWidget,Ui_Dialog):
 			y_list.append(y_value)
 			self.line_series.append(x_value,y_value)
 		print(f'x_list:{x_list}\ny_list:{y_list}\n')
+
+	#  start of SQL data plot part by Qt
+# **************************************VerTicaL@zlm**************************************
+	
+
+
+# **************************************VerTicaL@zlm**************************************
+	#  start of SQL data plot part by matplotlib
+	def __init__matplotlib(self):
+		"""Initialize matplotlib plot part
+		"""
+		Figure_Canvas=FigureCanvas(Figure(figsize=(4,3)))
+		self.Plot_gridlayout.addWidget(Figure_Canvas)
+		self.Plot_gridlayout.addWidget(NavigationToolbar(Figure_Canvas,self))
+		self.data_fig_ax=Figure_Canvas.figure.subplots()
+
+	def get_table_XYdata(self,Table_model:QSqlTableModel):
+		"""
+		get the plot data set of [x_value,y_value] 
+		"""
+		x_list=[]
+		y_list=[]
+		x_axis=self.X_axis_cbx.currentText()
+		y_axis=self.Y_axis_cbx.currentText()
+		#print(f'Table_model:{Table_model}:{Table_model.rowCount()}')
+		print(f'x_axis:{x_axis},y_axis:{y_axis},')
+		for i in range(Table_model.rowCount()):
+			x_value=Table_model.record(i).field(x_axis).value()
+			y_value=Table_model.record(i).field(y_axis).value()
+			x_list.append(x_value)
+			y_list.append(y_value)
+		return x_list,y_list,x_axis,y_axis
+
+	def matplotlib_lineplot(self):
+		"""plot the table data by  matplotlib
+		"""
+		table_model=self.tableView.model()
+		x_list,y_list,x_axis,y_axis=self.get_table_XYdata(table_model)
+		self.plot_sql_data(x_list,y_list,x_axis,y_axis)
+
+
+	def plot_sql_data(self, x_list: list, y_list: list, x_name: str, y_name: str):
+		"""
+		plot any x_list and y_list data,and set the Axis name x_name,y_name
+		:param x_list:
+		:param y_list:
+		:param x_name:
+		:param y_name:
+		:return:
+		"""
+		# plot
+		self.data_fig_ax.cla()
+		self.data_fig_ax.plot(x_list, y_list, marker='o', markersize=2, markerfacecolor='orchid',
+								   markeredgecolor='orchid', linestyle='-', color='c')
+		self.data_fig_ax.set_xlabel(x_name, fontsize=8, color='m')
+		self.data_fig_ax.set_ylabel(y_name, fontsize=8, color='m')
+		self.data_fig_ax.figure.canvas.draw()
+
+
+
 
 
 
