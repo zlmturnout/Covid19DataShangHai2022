@@ -438,7 +438,7 @@ class VieWDataCovid19SH(QWidget,Ui_Dialog):
                                    markeredgecolor='orchid', linestyle='-', color='c')
         self.data_fig_ax.set_xlabel(x_name, fontsize=12, color='m')
         self.data_fig_ax.set_ylabel(y_name, fontsize=12, color='m')
-        self.data_fig_ax.figure.autofmt_xdate(rotation=35)
+        self.data_fig_ax.figure.autofmt_xdate(rotation=25)
         self.data_fig_ax.figure.canvas.draw()
 
 
