@@ -1,10 +1,4 @@
 # coding=utf-8
-from calendar import c
-from email import header
-from re import T
-import sys,requests,os
-from tkinter import INSERT
-from numpy import insert
 
 from matplotlib.pyplot import get, table
 import random, json
