@@ -1,8 +1,6 @@
 import os,sys,time,datetime,traceback
 import re
 
-from matplotlib.pyplot import table
-
 # QT for python import
 import PySide6
 from PySide6.QtCore import QTimer, Slot, QThread, Signal, Qt,QTime,QDate,QDateTime
@@ -441,7 +439,14 @@ class VieWDataCovid19SH(QWidget,Ui_Dialog):
         self.data_fig_ax.figure.autofmt_xdate(rotation=25)
         self.data_fig_ax.figure.canvas.draw()
 
-
+    def closeEvent(self, event):
+        
+        close = QMessageBox.question(self,"QUIT","Are you sure to exit?",
+                                                   QMessageBox.Yes | QMessageBox.No)
+        if close ==QMessageBox.Yes:
+                event.accept()
+        else:
+                event.ignore()
 
 
 
